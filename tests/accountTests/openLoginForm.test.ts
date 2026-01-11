@@ -20,7 +20,7 @@ test.describe("Проверки попапа с авторизацией", () =>
         await loginPopupPage.clickLoginBtn()
 
         //assert
-        await expect(page).toHaveURL("/");
+        await mainPage.assertUserIsLoggedIn();
     });
 
     test("переход на регистрацию по кнопке", async ({ page }) => {

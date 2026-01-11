@@ -7,6 +7,8 @@ export class MainPage extends BasePage {
     readonly loginButtonDesktop: Locator;
     readonly loginButtonMobile: Locator;
     readonly myAdsBtn: Locator;
+    readonly userMenuBtn: Locator;
+    readonly loginModal: Locator;
 
     constructor(page: Page) {
         super(page);
@@ -15,6 +17,8 @@ export class MainPage extends BasePage {
         this.loginButtonDesktop = page.locator('[data-marker="login-button-desktop"]');
         this.loginButtonMobile = page.locator('[data-marker="login-button-mobile"]');
         this.myAdsBtn = page.locator('[data-marker="my-ads-link"]');
+        this.userMenuBtn = page.locator('[data-marker="user-menu-button"]');
+        this.loginModal = page.locator('[data-marker="login-modal-content"]');
     }
 
     protected root(): Locator {
@@ -35,6 +39,10 @@ export class MainPage extends BasePage {
     }
     async openLoginMobile() {
         await this.loginButtonMobile.click();
+    }
+
+    async assertUserIsLoggedIn() {
+        await expect(this.userMenuBtn).toBeVisible();
     }
 
 }

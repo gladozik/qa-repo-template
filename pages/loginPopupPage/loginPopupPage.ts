@@ -1,4 +1,4 @@
-import {Locator, Page} from "@playwright/test";
+import {expect, Locator, Page} from "@playwright/test";
 import {BasePage} from "../basePage";
 
 export class LoginPopupPage extends BasePage {
@@ -50,10 +50,10 @@ export class LoginPopupPage extends BasePage {
     }
 
     async assertEmailErrorIsVisible() {
-        await this.emailError.isVisible();
+        await expect(this.emailError).toBeVisible()
     }
 
     async assertPasswordErrorIsVisible() {
-        await this.passwordError.isVisible();
+        await expect(this.passwordError).toBeVisible()
     }
 }

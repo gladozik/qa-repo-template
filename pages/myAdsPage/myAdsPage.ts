@@ -16,6 +16,6 @@ export class MyAdsPage extends BasePage {
     }
 
     async assertEmptyStateTitleIsVisible() {
-        await this.emptyStateTitle.isVisible();
+        await expect(this.emptyStateTitle).toBeVisible();
     }
 }

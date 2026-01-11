@@ -13,6 +13,9 @@ export default defineConfig({
   use: {
     baseURL: BASE_URL,
     trace: 'on-first-retry',
+    launchOptions: {
+      slowMo: 1000,
+    },
   },
 
   projects: [
