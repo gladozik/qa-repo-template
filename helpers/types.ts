@@ -19,3 +19,9 @@ export type AuthResponse = {
     token: string;
     user: UserDto;
 };
+
+export type CreateAdDto = {
+    title: string;
+    description: string;
+    price: number;
+};

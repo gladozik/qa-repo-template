@@ -1,16 +1,14 @@
-import { test, expect } from "@playwright/test";
+import { test, expect } from "../../fixtures/auth.fixture";
 import {LoginPopupPage} from "../../pages/loginPopupPage/loginPopupPage";
 import {MainPage} from "../../pages/mainPage/mainPage";
 
 test.describe("Проверки попапа с авторизацией", () => {
-    test("Успешная авторизация", async ({ page }) => {
+    test("Успешная авторизация", async ({ page, createdUser }) => {
         //arrange
         const loginPopupPage = new LoginPopupPage(page);
         const mainPage = new MainPage(page)
-
-        const uniq = Date.now();
-        const email = `gedeon.qa+${uniq}@example.ru`;
-        const password = "Password123";
+        const email = createdUser.email;
+        const password = createdUser.password;
 
         //act
         await mainPage.openMainPage();
@@ -34,7 +32,10 @@ test.describe("Проверки попапа с авторизацией", () =>
         await loginPopup.clickRegisterBtn()
 
         //assert
-        await expect(page).toHaveURL("/auth/register");
+        await expect(
+            page, 
+            'Переход на страницу регистрации не выполнен'
+        ).toHaveURL("/auth/register");
     });
 
     test("логин с пустыми полями не должен увести на главную", async ({ page }) => {
