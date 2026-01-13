@@ -7,19 +7,26 @@ export async function applyAuthToLocalStorage(
     page: Page,
     auth: AuthResponse
 ) {
-    const authStorageValue = JSON.stringify({
+    const authStorage = {
         state: {
             user: auth.user,
             token: auth.token,
         },
         version: 0,
-    });
+    };
 
-    // Кладём стор ДО первой загрузки приложения
-    await page.addInitScript(({ authStorageValue }) => {
-        localStorage.setItem("auth-storage", authStorageValue);
-    }, { authStorageValue });
+    const tokenStorageValue = JSON.stringify(auth.token);
+    const userStorageValue = JSON.stringify(auth.user);
+    const authStorageValue = JSON.stringify(authStorage);
 
-    // Заходим в приложение уже с готовым стором
+    await page.addInitScript(
+        ({ authStorageValue, tokenStorageValue, userStorageValue }) => {
+            localStorage.setItem("auth-storage", authStorageValue);
+            localStorage.setItem("auth-token", tokenStorageValue);
+            localStorage.setItem("auth-user", userStorageValue);
+        },
+        { authStorageValue, tokenStorageValue, userStorageValue }
+    );
+
     await page.goto(UI_BASE, { waitUntil: "domcontentloaded" });
 }
