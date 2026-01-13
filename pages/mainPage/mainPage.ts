@@ -1,5 +1,5 @@
 import { Locator, Page, expect } from "@playwright/test";
-import {BasePage} from "../basePage";
+import { BasePage } from "../basePage";
 
 export class MainPage extends BasePage {
     readonly header: Locator;
@@ -12,6 +12,7 @@ export class MainPage extends BasePage {
 
     constructor(page: Page) {
         super(page);
+
         this.header = page.locator("header");
         this.mobileMenuButton = page.locator('[data-marker="mobile-menu-button"]');
         this.loginButtonDesktop = page.locator('[data-marker="login-button-desktop"]');
@@ -42,7 +43,7 @@ export class MainPage extends BasePage {
     }
 
     async assertUserIsLoggedIn() {
-        await expect(this.userMenuBtn).toBeVisible();
+        await expect(this.userMenuBtn, 'Отсутствует кнопка меню юзера').toBeVisible();
     }
 
 }

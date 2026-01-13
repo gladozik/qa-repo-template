@@ -1,16 +1,15 @@
-import { test, expect } from "@playwright/test";
-import {LoginPopupPage} from "../../pages/loginPopupPage/loginPopupPage";
-import {MainPage} from "../../pages/mainPage/mainPage";
+import { test } from "../../fixtures/auth.fixture";
+import { LoginPopupPage } from "../../pages/loginPopupPage/loginPopupPage";
+import { MainPage } from "../../pages/mainPage/mainPage";
+import { RegisterPage } from "../../pages/registerPage/registerPage";
 
 test.describe("Проверки попапа с авторизацией", () => {
-    test("Успешная авторизация", async ({ page }) => {
+    test("Успешная авторизация", async ({ page, createdUser }) => {
         //arrange
         const loginPopupPage = new LoginPopupPage(page);
         const mainPage = new MainPage(page)
-
-        const uniq = Date.now();
-        const email = `gedeon.qa+${uniq}@example.ru`;
-        const password = "Password123";
+        const email = createdUser.email;
+        const password = createdUser.password;
 
         //act
         await mainPage.openMainPage();
@@ -23,10 +22,11 @@ test.describe("Проверки попапа с авторизацией", () =>
         await mainPage.assertUserIsLoggedIn();
     });
 
-    test("переход на регистрацию по кнопке", async ({ page }) => {
+    test("Переход на регистрацию по кнопке", async ({ page }) => {
         //arrange
         const loginPopup = new LoginPopupPage(page);
         const mainPage = new MainPage(page)
+        const registerPage = new RegisterPage(page);
 
         //act
         await mainPage.openMainPage();
@@ -34,10 +34,10 @@ test.describe("Проверки попапа с авторизацией", () =>
         await loginPopup.clickRegisterBtn()
 
         //assert
-        await expect(page).toHaveURL("/auth/register");
+        await registerPage.assertRegisterPageIsOpen();
     });
 
-    test("логин с пустыми полями не должен увести на главную", async ({ page }) => {
+    test("Логин с пустыми полями не должен увести на главную", async ({ page }) => {
         //arrange
         const loginPopup = new LoginPopupPage(page);
         const mainPage = new MainPage(page)

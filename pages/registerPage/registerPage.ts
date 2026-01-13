@@ -1,5 +1,6 @@
-import { Locator, Page } from "@playwright/test";
-import {BasePage} from "../basePage";
+import { Locator, Page, expect } from "@playwright/test";
+import { BasePage } from "../basePage";
+import { AUTH_REGISTER_URL } from "../../helpers/consts";
 
 export class RegisterPage extends BasePage {
     readonly form: Locator;
@@ -33,7 +34,7 @@ export class RegisterPage extends BasePage {
     }
 
     async openRegisterPage() {
-        await this.page.goto("/auth/register");
+        await this.page.goto(AUTH_REGISTER_URL);
         await this.waitForOpen();
     }
 
@@ -95,7 +96,10 @@ export class RegisterPage extends BasePage {
         await this.submit();
     }
 
-    async waitForOpen() {
-
+    async assertRegisterPageIsOpen() {
+        await expect(
+            this.page, 
+            'Переход на страницу регистрации выполнен'
+        ).toHaveURL(AUTH_REGISTER_URL);
     }
 }
