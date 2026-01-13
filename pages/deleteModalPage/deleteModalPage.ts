@@ -1,5 +1,5 @@
 import { Locator, Page, expect } from "@playwright/test";
-import {BasePage} from "../basePage";
+import { BasePage } from "../basePage";
 
 export class DeleteModalPage extends BasePage {
     readonly deleteModalForm: Locator;
@@ -7,6 +7,7 @@ export class DeleteModalPage extends BasePage {
 
     constructor(page: Page) {
         super(page);
+
         this.deleteModalForm = page.locator('[data-marker="delete-modal-form"]');
         this.deleteButton = page.locator('[data-marker="delete-modal-confirm"]');
     }

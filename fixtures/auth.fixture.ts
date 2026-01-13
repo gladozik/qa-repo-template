@@ -63,6 +63,7 @@ export const test = base.extend<Fixtures>({
     authedPage: async ({ page, auth }, use) => {
         console.log('fixture page.url() before auth =', page.url());
 
+        // Предлагаю это добавить по дефолту, у меня заняло немало времени чтобы пофиксить
         // Прокидываем заголовок авторизации для всех API запросов, т.к. в сценариях слетала авторизация
         await page.context().route('**/api/**', async (route) => {
             const req = route.request();

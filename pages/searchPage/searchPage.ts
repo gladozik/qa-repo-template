@@ -1,6 +1,7 @@
 import { Locator, Page, expect } from "@playwright/test";
-import {BasePage} from "../basePage";
-import {parsePrice} from "../../helpers/priceParseHelper";
+import { BasePage } from "../basePage";
+import { parsePrice } from "../../helpers/priceParseHelper";
+import { MAIN_PAGE_URL } from "../../helpers/consts";
 
 export class SearchPage extends BasePage {
     readonly searchInput: Locator;
@@ -13,9 +14,10 @@ export class SearchPage extends BasePage {
 
     constructor(page: Page) {
         super(page);
+
         this.searchInput = page.locator('[data-marker="search-input"]');
         this.advertisimentCard = page.locator('[data-marker="advertisement-card"]');
-        this.emptyResultStub = page.locator('//img[@src="/not-found.png"]');
+        this.emptyResultStub = page.locator('//*[@src="/not-found.png"]');
         this.advertisementCard = page.locator('[data-marker="advertisement-card"]');
         this.sortDropdown = page.locator('[data-marker="sort-dropdown"]');
         this.sortOptionExpensive = page.locator('[data-marker="sort-option-expensive"]');
@@ -27,7 +29,7 @@ export class SearchPage extends BasePage {
     }
 
     async openSearchPage() {
-        await this.page.goto("/");
+        await this.page.goto(MAIN_PAGE_URL);
         await this.waitForOpen();
     }
 
@@ -45,11 +47,12 @@ export class SearchPage extends BasePage {
         await this.waitForOpen();
     }
 
-    async getPriceForAdByIndex(index: number): Promise<number> {
+    async getPriceOfAdByIndex(index: number): Promise<number> {
         const priceText = await this.adCardPrice.nth(index).textContent();
         if (priceText === null) {
-            throw new Error(`getPriceForAdByIndex: не найдена цена для карточки с индексом ${index}`);
+            throw new Error(`getPriceOfAdByIndex: не найдена цена для карточки с индексом ${index}`);
         }
+
         return parsePrice(priceText);
     }
 
@@ -76,5 +79,15 @@ export class SearchPage extends BasePage {
 
     async assertSearchResultsNumber(expectedCount: number) {
         expect(expectedCount).toEqual(await this.countAdvertisementCards());
+    }
+
+    async assertFirstAdPriceGreaterThanSecondAdPrice() {
+        const firstAdPrice = await this.getPriceOfAdByIndex(0);
+        const secondAdPrice = await this.getPriceOfAdByIndex(1);
+
+        expect(
+        firstAdPrice, 
+        'Цена первого айтема в выдаче не больше цены второго айтема')
+        .toBeGreaterThan(secondAdPrice);
     }
 }

@@ -1,6 +1,6 @@
 import { test } from "@playwright/test";
-import {RegisterPage} from "../../pages/registerPage/registerPage";
-import {MainPage} from "../../pages/mainPage/mainPage";
+import { RegisterPage } from "../../pages/registerPage/registerPage";
+import { MainPage } from "../../pages/mainPage/mainPage";
 
 test("Регистрация пользователя", async ({ page }) => {
     //arrange

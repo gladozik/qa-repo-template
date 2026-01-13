@@ -1,5 +1,6 @@
-import {expect, Locator, Page} from "@playwright/test";
-import {BasePage} from "../basePage";
+import { expect, Locator, Page } from "@playwright/test";
+import { BasePage } from "../basePage";
+import { AUTH_REGISTER_URL } from "../../helpers/consts";
 
 export class LoginPopupPage extends BasePage {
     readonly loginInput: Locator;
@@ -11,6 +12,7 @@ export class LoginPopupPage extends BasePage {
 
     constructor(page: Page) {
         super(page);
+
         this.loginInput = page.locator('[data-marker="email-input"]');
         this.passwordInput = page.locator('[data-marker="password-input"]');
         this.loginSubmitButton = page.locator('[data-marker="login-submit-button"]');

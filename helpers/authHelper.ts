@@ -1,5 +1,5 @@
-import {APIRequestContext} from "@playwright/test";
-import {AuthResponse, RegisterDto} from "./types";
+import { APIRequestContext } from "@playwright/test";
+import { AuthResponse, RegisterDto } from "./types";
 
 export async function registerUser(request: APIRequestContext, dto: RegisterDto) {
     const res = await request.post('/api/v1/auth/register', { data: dto });

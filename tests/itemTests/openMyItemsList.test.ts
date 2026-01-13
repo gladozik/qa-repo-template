@@ -1,6 +1,6 @@
 import { test } from "../../fixtures/auth.fixture";
-import {MyAdsPage} from "../../pages/myAdsPage/myAdsPage";
-import {MainPage} from "../../pages/mainPage/mainPage";
+import { MyAdsPage } from "../../pages/myAdsPage/myAdsPage";
+import { MainPage } from "../../pages/mainPage/mainPage";
 
 test("Открытие страницы Мои объявления", async ({ authedPage }) => {
     //arrange

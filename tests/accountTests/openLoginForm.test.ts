@@ -1,6 +1,7 @@
-import { test, expect } from "../../fixtures/auth.fixture";
-import {LoginPopupPage} from "../../pages/loginPopupPage/loginPopupPage";
-import {MainPage} from "../../pages/mainPage/mainPage";
+import { test } from "../../fixtures/auth.fixture";
+import { LoginPopupPage } from "../../pages/loginPopupPage/loginPopupPage";
+import { MainPage } from "../../pages/mainPage/mainPage";
+import { RegisterPage } from "../../pages/registerPage/registerPage";
 
 test.describe("Проверки попапа с авторизацией", () => {
     test("Успешная авторизация", async ({ page, createdUser }) => {
@@ -21,10 +22,11 @@ test.describe("Проверки попапа с авторизацией", () =>
         await mainPage.assertUserIsLoggedIn();
     });
 
-    test("переход на регистрацию по кнопке", async ({ page }) => {
+    test("Переход на регистрацию по кнопке", async ({ page }) => {
         //arrange
         const loginPopup = new LoginPopupPage(page);
         const mainPage = new MainPage(page)
+        const registerPage = new RegisterPage(page);
 
         //act
         await mainPage.openMainPage();
@@ -32,13 +34,10 @@ test.describe("Проверки попапа с авторизацией", () =>
         await loginPopup.clickRegisterBtn()
 
         //assert
-        await expect(
-            page, 
-            'Переход на страницу регистрации не выполнен'
-        ).toHaveURL("/auth/register");
+        await registerPage.assertRegisterPageIsOpen();
     });
 
-    test("логин с пустыми полями не должен увести на главную", async ({ page }) => {
+    test("Логин с пустыми полями не должен увести на главную", async ({ page }) => {
         //arrange
         const loginPopup = new LoginPopupPage(page);
         const mainPage = new MainPage(page)

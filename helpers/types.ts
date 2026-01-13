@@ -23,5 +23,6 @@ export type AuthResponse = {
 export type CreateAdDto = {
     title: string;
     description: string;
-    price: number;
+    price?: number;
+    quantity?: number;
 };

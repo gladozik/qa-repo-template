@@ -1,4 +1,4 @@
-import { expect, test } from "../../fixtures/auth.fixture";
+import { test } from "../../fixtures/auth.fixture";
 import { SearchPage } from "../../pages/searchPage/searchPage";
 
 test("Отображение заглушки при пустой выдаче в поиске", async ({ page }) => {

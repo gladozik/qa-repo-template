@@ -4,6 +4,7 @@ const BASE_URL = 'https://testboard.avito.com';
 
 export default defineConfig({
   testDir: './tests',
+  // Настройку fullyParallel отключить по умолчанию
   fullyParallel: false,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
@@ -16,6 +17,10 @@ export default defineConfig({
     launchOptions: {
       slowMo: 1000,
     },
+    // Настройку headless отключить по умолчанию
+    headless: false,
+    // Настройку разрешения задать по умолчанию
+    viewport: { width: 1920, height: 1080 },
   },
 
   projects: [
