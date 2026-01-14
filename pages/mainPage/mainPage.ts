@@ -2,7 +2,7 @@ import { Locator, Page, expect } from "@playwright/test";
 import {BasePage} from "../basePage";
 
 export class MainPage extends BasePage {
-    protected pageName = 'Главная страница';
+    protected pageName = "Главная страница";
 
     readonly header: Locator;
     readonly mobileMenuButton: Locator;
