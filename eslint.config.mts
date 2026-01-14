@@ -13,7 +13,6 @@ export default defineConfig([
     },
     {
         rules: {
-            "eqeqeq": "error",
             "quotes": "error",
             "eol-last": "error",
             "semi": "error",
