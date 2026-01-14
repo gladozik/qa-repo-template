@@ -7,8 +7,8 @@ export class MyAdsPage extends BasePage {
 
     constructor(page: Page) {
         super(page);
-        this.myAdsTitle = page.locator('[data-marker="my-ads-title"]');
-        this.emptyStateTitle = page.locator('[data-marker="empty-state-title"]');
+        this.myAdsTitle = page.locator("[data-marker=\"my-ads-title\"]");
+        this.emptyStateTitle = page.locator("[data-marker=\"empty-state-title\"]");
     }
 
     protected root(): Locator {

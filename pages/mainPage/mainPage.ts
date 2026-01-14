@@ -13,12 +13,12 @@ export class MainPage extends BasePage {
     constructor(page: Page) {
         super(page);
         this.header = page.locator("header");
-        this.mobileMenuButton = page.locator('[data-marker="mobile-menu-button"]');
-        this.loginButtonDesktop = page.locator('[data-marker="login-button-desktop"]');
-        this.loginButtonMobile = page.locator('[data-marker="login-button-mobile"]');
-        this.myAdsBtn = page.locator('[data-marker="my-ads-link"]');
-        this.userMenuBtn = page.locator('[data-marker="user-menu-button"]');
-        this.loginModal = page.locator('[data-marker="login-modal-content"]');
+        this.mobileMenuButton = page.locator("[data-marker=\"mobile-menu-button\"]");
+        this.loginButtonDesktop = page.locator("[data-marker=\"login-button-desktop\"]");
+        this.loginButtonMobile = page.locator("[data-marker=\"login-button-mobile\"]");
+        this.myAdsBtn = page.locator("[data-marker=\"my-ads-link\"]");
+        this.userMenuBtn = page.locator("[data-marker=\"user-menu-button\"]");
+        this.loginModal = page.locator("[data-marker=\"login-modal-content\"]");
     }
 
     protected root(): Locator {
@@ -31,7 +31,7 @@ export class MainPage extends BasePage {
     }
 
     async openMyAdsPage() {
-        await this.myAdsBtn.click()
+        await this.myAdsBtn.click();
     }
 
     async openLoginDesktop() {
