@@ -8,9 +8,13 @@ export abstract class BasePage {
     }
 
     protected abstract root(): Locator;
+    protected abstract pageName: string;
 
     async waitForOpen() {
-        await expect(this.root()).toBeVisible();
+        await expect(
+            this.root(),
+            `Страница ${this.pageName} не открылась`)
+            .toBeVisible();
     }
 
     async waitForUrl(re: RegExp) {
