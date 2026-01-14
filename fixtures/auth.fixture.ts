@@ -1,6 +1,6 @@
-import { test as base, expect, Page, request as pwRequest, APIRequestContext } from '@playwright/test';
-import { registerUser, login } from '../helpers/authHelper';
-import { applyAuthToLocalStorage } from '../helpers/authSetStorageHelper';
+import { test as base, expect, Page, request as pwRequest, APIRequestContext } from "@playwright/test";
+import { registerUser, login } from "../helpers/authHelper";
+import { applyAuthToLocalStorage } from "../helpers/authSetStorageHelper";
 import {AuthResponse, RegisterDto} from "../helpers/types";
 
 type User = RegisterDto;
@@ -16,14 +16,14 @@ type Fixtures = {
     authedPage: Page;
 };
 
-const API_BASE = 'https://testboard.avito.com';
+const API_BASE = "https://testboard.avito.com";
 
 export const test = base.extend<Fixtures>({
-    api: async ({}, use) => {
+    api: async (_, use) => {
         const api = await pwRequest.newContext({
             baseURL: API_BASE,
             extraHTTPHeaders: {
-                'Content-Type': 'application/json',
+                "Content-Type": "application/json",
             },
         });
 
@@ -33,10 +33,10 @@ export const test = base.extend<Fixtures>({
 
     createdUser: async ({ api }, use) => {
         const user: User = {
-            first_name: 'Иван',
-            last_name: 'Петров',
+            first_name: "Иван",
+            last_name: "Петров",
             email: uniqueEmail(),
-            password: 'Somepassword123',
+            password: "Somepassword123",
         };
 
         await registerUser(api, user);
@@ -53,11 +53,11 @@ export const test = base.extend<Fixtures>({
     },
 
     authedPage: async ({ page, auth }, use) => {
-        console.log('fixture page.url() before auth =', page.url());
+        console.log("fixture page.url() before auth =", page.url());
 
         await applyAuthToLocalStorage(page, auth);
 
-        console.log('fixture page.url() after auth =', page.url());
+        console.log("fixture page.url() after auth =", page.url());
         await use(page);
     },
 });

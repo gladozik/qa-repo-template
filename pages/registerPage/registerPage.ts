@@ -16,16 +16,16 @@ export class RegisterPage extends BasePage {
     constructor(page: Page) {
         super(page);
 
-        this.form = page.locator('[data-marker="register-form"]');
-        this.firstNameInput = page.locator('[data-marker="first-name-input"]');
-        this.lastNameInput = page.locator('[data-marker="last-name-input"]');
-        this.emailInput = page.locator('[data-marker="email-input"]');
-        this.passwordInput = page.locator('[data-marker="password-input"]');
-        this.confirmPasswordInput = page.locator('[data-marker="confirm-password-input"]');
-        this.birthdateInput = page.locator('[data-marker="birthdate-input"]');
-        this.passwordToggle = page.locator('[data-marker="password-toggle"]');
-        this.confirmPasswordToggle = page.locator('[data-marker="confirm-password-toggle"]');
-        this.submitButton = page.locator('[data-marker="submit-button"]');
+        this.form = page.locator("[data-marker=\"register-form\"]");
+        this.firstNameInput = page.locator("[data-marker=\"first-name-input\"]");
+        this.lastNameInput = page.locator("[data-marker=\"last-name-input\"]");
+        this.emailInput = page.locator("[data-marker=\"email-input\"]");
+        this.passwordInput = page.locator("[data-marker=\"password-input\"]");
+        this.confirmPasswordInput = page.locator("[data-marker=\"confirm-password-input\"]");
+        this.birthdateInput = page.locator("[data-marker=\"birthdate-input\"]");
+        this.passwordToggle = page.locator("[data-marker=\"password-toggle\"]");
+        this.confirmPasswordToggle = page.locator("[data-marker=\"confirm-password-toggle\"]");
+        this.submitButton = page.locator("[data-marker=\"submit-button\"]");
     }
 
     protected root(): Locator {

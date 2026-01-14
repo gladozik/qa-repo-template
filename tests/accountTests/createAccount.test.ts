@@ -19,5 +19,5 @@ test("Регистрация пользователя", async ({ page }) => {
     });
 
     //assert
-    await expect(page).toHaveURL('/mainPage');
+    await expect(page).toHaveURL("/mainPage");
 });

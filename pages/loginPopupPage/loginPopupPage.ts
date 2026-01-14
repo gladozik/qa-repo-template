@@ -11,12 +11,12 @@ export class LoginPopupPage extends BasePage {
 
     constructor(page: Page) {
         super(page);
-        this.loginInput = page.locator('[data-marker="email-input"]');
-        this.passwordInput = page.locator('[data-marker="password-input"]');
-        this.loginSubmitButton = page.locator('[data-marker="login-submit-button"]');
-        this.registerButton = page.locator('[data-marker="login-modal-register-link"]');
-        this.emailError = page.locator('[data-marker="email-error"]')
-        this.passwordError = page.locator('[data-marker="password-error"]')
+        this.loginInput = page.locator("[data-marker=\"email-input\"]");
+        this.passwordInput = page.locator("[data-marker=\"password-input\"]");
+        this.loginSubmitButton = page.locator("[data-marker=\"login-submit-button\"]");
+        this.registerButton = page.locator("[data-marker=\"login-modal-register-link\"]");
+        this.emailError = page.locator("[data-marker=\"email-error\"]");
+        this.passwordError = page.locator("[data-marker=\"password-error\"]");
     }
 
     protected root(): Locator {
@@ -50,10 +50,10 @@ export class LoginPopupPage extends BasePage {
     }
 
     async assertEmailErrorIsVisible() {
-        await expect(this.emailError).toBeVisible()
+        await expect(this.emailError).toBeVisible();
     }
 
     async assertPasswordErrorIsVisible() {
-        await expect(this.passwordError).toBeVisible()
+        await expect(this.passwordError).toBeVisible();
     }
 }
