@@ -19,3 +19,29 @@ export type AuthResponse = {
     token: string;
     user: UserDto;
 };
+
+export type CreateAdReqDto = {
+    title: string;
+    description: string;
+    price?: number;
+    quantity?: number;
+};
+
+export type CreateAdResDto = {
+    id: string;
+    title: string;
+    description: string;
+    price?: number;
+    quantity?: number;
+    user_id: string;
+    created_at: string;
+    updated_at: string;
+    photos: {
+        id: string;
+        url: string;
+        sort_order: number;
+        created_at: string;
+    }[];
+};
+
+

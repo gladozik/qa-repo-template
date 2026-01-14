@@ -7,15 +7,19 @@ import {
 } from "@playwright/test";
 import { login } from "../helpers/authHelper";
 import { applyAuthToLocalStorage } from "../helpers/authSetStorageHelper";
-import { AuthResponse } from "../helpers/types";
+import {AuthResponse, CreateAdResDto} from "../helpers/types";
+import {createAd, createAds, deleteAd, deleteAds} from "../helpers/adHelper";
 
 type Fixtures = {
     api: APIRequestContext;
     auth: AuthResponse;
     authedPage: Page;
+    authWithAd: { ad: CreateAdResDto };
+    authWithTwoAds: { ads: CreateAdResDto[] };
 };
 
 const API_BASE = "https://testboard.avito.com";
+const TEST_DESCRIPTION = "Объявление создано автоматически";
 
 export const test = base.extend<Fixtures>({
     api: async ({ request: _request }, use) => {
@@ -51,6 +55,46 @@ export const test = base.extend<Fixtures>({
         console.log("fixture page.url() after auth =", page.url());
         await use(page);
     },
+
+    // Фикстура для создания объялвения от пользователя
+    authWithAd: async ({ api, auth }, use) => {
+        const title = uniqueAdTitle();
+        const description = TEST_DESCRIPTION;
+        const price = 123;
+
+        const ad = await createAd(api, auth.token, {
+            title,
+            description,
+            price,
+        });
+
+        try {
+            await use({ ad });
+        } finally {
+            await deleteAd(api, auth.token, ad.id);
+        }
+    },
+
+    // Фикстура создания нескольких объявлений
+    authWithTwoAds: async ({ api, auth }, use) => {
+        const baseTitle = uniqueAdTitle();
+        const dtos = [
+            { title: baseTitle, description: TEST_DESCRIPTION, price: 111 },
+            { title: baseTitle, description: TEST_DESCRIPTION, price: 222 },
+        ];
+
+        const ads = await createAds(api, auth.token, dtos);
+
+        try {
+            await use({ ads });
+        } finally {
+            await deleteAds(api, auth.token, ads);
+        }
+    }
 });
+
+function uniqueAdTitle() {
+    return `Тестовое объявление ${Date.now()}`;
+}
 
 export { expect };
