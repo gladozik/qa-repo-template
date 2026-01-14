@@ -42,7 +42,10 @@ export class MainPage extends BasePage {
     }
 
     async assertUserIsLoggedIn() {
-        await expect(this.userMenuBtn).toBeVisible();
+        await expect(
+            this.userMenuBtn,
+            "Пользователь не авторизован")
+            .toBeVisible();
     }
 
 }

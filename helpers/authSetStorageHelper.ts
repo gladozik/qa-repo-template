@@ -7,25 +7,27 @@ export async function applyAuthToLocalStorage(
     page: Page,
     auth: AuthResponse
 ) {
-    const authStorage = {
+    const authStorageValue = JSON.stringify({
         state: {
             user: auth.user,
             token: auth.token,
         },
         version: 0,
-    };
+    });
 
-    const tokenStorageValue = JSON.stringify(auth.token);
     const userStorageValue = JSON.stringify(auth.user);
-    const authStorageValue = JSON.stringify(authStorage);
 
     await page.addInitScript(
-        ({ authStorageValue, tokenStorageValue, userStorageValue }) => {
+        ({ authStorageValue, userStorageValue, token }) => {
             localStorage.setItem("auth-storage", authStorageValue);
-            localStorage.setItem("auth-token", tokenStorageValue);
-            localStorage.setItem("auth-user", userStorageValue);
+            localStorage.setItem("auth_user", userStorageValue);
+            localStorage.setItem("auth_token", token);
         },
-        { authStorageValue, tokenStorageValue, userStorageValue }
+        {
+            authStorageValue,
+            userStorageValue,
+            token: auth.token,
+        }
     );
 
     await page.goto(UI_BASE, { waitUntil: "domcontentloaded" });

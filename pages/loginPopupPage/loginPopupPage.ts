@@ -50,10 +50,16 @@ export class LoginPopupPage extends BasePage {
     }
 
     async assertEmailErrorIsVisible() {
-        await expect(this.emailError).toBeVisible();
+        await expect(
+            this.emailError,
+            "Ошибка для поля email не отображается"
+        ).toBeVisible();
     }
 
     async assertPasswordErrorIsVisible() {
-        await expect(this.passwordError).toBeVisible();
+        await expect(
+            this.passwordError,
+            "Ошибка для поля пароля не отображается")
+            .toBeVisible();
     }
 }
