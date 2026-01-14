@@ -12,6 +12,7 @@ export default defineConfig([
         languageOptions: {globals: globals.browser}
     },
     {
+
         rules: {
             "quotes": "error",
             "eol-last": "error",
@@ -19,7 +20,15 @@ export default defineConfig([
             "indent": "error",
             "linebreak-style": "error",
             "prefer-const": "error",
-            "no-unused-vars": "error",
+            "@typescript-eslint/no-unused-vars": [
+                "error",
+                {
+                    "argsIgnorePattern": "^_",
+                    "varsIgnorePattern": "^_",
+                    "caughtErrorsIgnorePattern": "^_"
+                }
+            ]
+
         },
     },
 
