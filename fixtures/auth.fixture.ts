@@ -1,4 +1,3 @@
-
 import {
     test as base,
     expect,
@@ -19,7 +18,7 @@ type Fixtures = {
 const API_BASE = "https://testboard.avito.com";
 
 export const test = base.extend<Fixtures>({
-    api: async (_, use) => {
+    api: async ({ request: _request }, use) => {
         const api = await pwRequest.newContext({
             baseURL: API_BASE,
             extraHTTPHeaders: {
