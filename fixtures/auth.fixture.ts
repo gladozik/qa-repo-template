@@ -1,17 +1,17 @@
-import { test as base, expect, Page, request as pwRequest, APIRequestContext } from "@playwright/test";
-import { registerUser, login } from "../helpers/authHelper";
+
+import {
+    test as base,
+    expect,
+    Page,
+    request as pwRequest,
+    APIRequestContext,
+} from "@playwright/test";
+import { login } from "../helpers/authHelper";
 import { applyAuthToLocalStorage } from "../helpers/authSetStorageHelper";
-import {AuthResponse, RegisterDto} from "../helpers/types";
-
-type User = RegisterDto;
-
-function uniqueEmail() {
-    return `user_${Date.now()}@example.com`;
-}
+import { AuthResponse } from "../helpers/types";
 
 type Fixtures = {
     api: APIRequestContext;
-    createdUser: User;
     auth: AuthResponse;
     authedPage: Page;
 };
@@ -30,25 +30,17 @@ export const test = base.extend<Fixtures>({
         await use(api);
         await api.dispose();
     },
+    auth: async ({ api }, use) => {
+        const email = process.env.E2E_USER_EMAIL;
+        const password = process.env.E2E_USER_PASSWORD;
 
-    createdUser: async ({ api }, use) => {
-        const user: User = {
-            first_name: "Иван",
-            last_name: "Петров",
-            email: uniqueEmail(),
-            password: "Somepassword123",
-        };
+        if (!email || !password) {
+            throw new Error(
+                "Missing env creds: set E2E_USER_EMAIL and E2E_USER_PASSWORD in .env"
+            );
+        }
 
-        await registerUser(api, user);
-        await use(user);
-    },
-
-    auth: async ({ api, createdUser }, use) => {
-        const auth = await login(api, {
-            email: createdUser.email,
-            password: createdUser.password,
-        });
-
+        const auth = await login(api, { email, password });
         await use(auth);
     },
 

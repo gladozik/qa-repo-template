@@ -1,4 +1,6 @@
+import "dotenv/config";
 import { defineConfig, devices } from "@playwright/test";
+
 
 const BASE_URL = "https://testboard.avito.com";
 

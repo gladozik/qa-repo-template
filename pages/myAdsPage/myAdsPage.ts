@@ -16,6 +16,9 @@ export class MyAdsPage extends BasePage {
     }
 
     async assertEmptyStateTitleIsVisible() {
-        await expect(this.emptyStateTitle).toBeVisible();
+        await expect(
+            this.emptyStateTitle,
+            "Заголовок заглушки отсутствия объявлений не отображается")
+            .toBeVisible();
     }
 }
