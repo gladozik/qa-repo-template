@@ -2,7 +2,7 @@ import { Locator, Page, expect } from "@playwright/test";
 import {BasePage} from "../basePage";
 
 export class MyAdsPage extends BasePage {
-    protected pageName = 'Мои объявления';
+    protected pageName = "Мои объявления";
 
     readonly emptyStateTitle: Locator;
     readonly myAdsTitle: Locator;
