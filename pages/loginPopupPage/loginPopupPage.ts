@@ -2,6 +2,8 @@ import {expect, Locator, Page} from "@playwright/test";
 import {BasePage} from "../basePage";
 
 export class LoginPopupPage extends BasePage {
+    protected pageName = 'Попап с авторизацией';
+
     readonly loginInput: Locator;
     readonly passwordInput: Locator;
     readonly loginSubmitButton: Locator;

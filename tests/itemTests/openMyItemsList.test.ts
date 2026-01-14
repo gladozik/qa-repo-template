@@ -12,5 +12,5 @@ test("Открытие страницы Мои объявления", async ({ a
     await mainPage.openMyAdsPage();
 
     //assert
-    await myAdsPage.assertEmptyStateTitleIsVisible();
+    await myAdsPage.waitForOpen();
 });
